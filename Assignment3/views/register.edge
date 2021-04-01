@@ -1,0 +1,56 @@
+@layout('layouts.app')
+@section('content')
+    <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/img/walk-3784045.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Create a new account</h1>
+            <span class="subheading">Create a new user to add to the website</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+            @if(errors.length > 0)
+              <ul class="list-group">
+                @each(error in errors)
+                  <li class="list-group-item text-danger">
+                    {{ error }}
+                  </li>
+                @endeach
+              </ul>
+            @endif
+              <form action="/users/register" method="POST" encType="multipart/form-data">
+                <div class="control-group">
+                        <div class="form-group floating-label-form-group controls" >
+                          <label>Username</label>
+                          <input type="text" class="form-control" value="{{data.username || ''}}" placeholder="Username" name="username" required>
+                        </div>
+                </div>
+                <div class="control-group">
+                      <div class="form-group floating-label-form-group controls" >
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="{{data.email || ''}}" placeholder="Email" name="email" required>
+                      </div>
+                </div>
+                <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                          <label>Password</label>
+                          <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        </div>
+                </div>
+                <div class="form-group my-4 text-center">
+                      <button class="btn btn-primary">Register</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+@endsection

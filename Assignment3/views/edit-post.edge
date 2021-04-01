@@ -1,0 +1,72 @@
+@layout('layouts.app')
+@section('content')
+ <!-- Page Header -->
+ <header class="masthead" style="background-image: url('{{ post.image }}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>Edit Post</h1>
+            <!--<h2 class="subheading">Edit the field of a live post</h2>
+            <span class="meta">Posted by
+              <a href="#">{{ post.author.username }}</a>
+              on {{ post.createdAt.toDateString() }} </span>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form action="/post/edit-store" method="post" encType="multipart/form-data">
+                <div class="control-group">
+                      <div class="form-group floating-label-form-group controls" >
+                        <label>Title</label>
+                        <input type="text" class="form-control" value="{{ post.title }}" name="title" required>
+                      </div>
+                </div>
+                <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                          <label>Subtitle</label>
+                          <input type="text" class="form-control" value="{{ post.subtitle }}" name="subtitle" required>
+                        </div>
+                </div>
+                <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                              <label>Content</label>
+                              <textarea name="content"  id="summernote" cols="30" rows="30" class="form-control" value="{{{post.content}}}"></textarea>
+                        </div>
+                </div>
+                <div class="control-group mt-5">
+                    <input type="file" name="image" value="{{ post.image }}" class="form-control-file" required>
+                    <h6>Current Uploaded Image: {{ post.image }}</h6>
+                </div>
+                <div class="control-group disabled">
+                  <input type="text" name="_id" value="{{ post.id }}" class="form-control d-none" required>
+                </div>
+                <div class="form-group my-5 text-center">
+                      <button class="btn btn-primary" type="submit">Confirm Changes</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </article>
+@endsection
+@section('styles')
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+@endsection
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<script>
+ $('#summernote').summernote({
+  tabsize: 2,
+  height: 600
+ });
+</script>
+@endsection

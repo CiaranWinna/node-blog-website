@@ -1,0 +1,52 @@
+@layout('layouts.app')
+@section('content')
+    <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/animal-2178664.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Welcome to Athenry Dog Park Blog</h1>
+            <span class="subheading">Keep up to date with everything happening at the park</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+       @each(post in posts)
+       <div class="post-preview">
+            <a href="/post/{{ post._id }}">
+              <h2 class="post-title">
+                {{ post.title }}
+              </h2>
+              <h3 class="post-subtitle">
+                    {{ post.subtitle }}
+              </h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">{{ post.author.username }}</a>
+              on {{ post.createdAt.toDateString() }} </p>
+              @if(auth)
+            <form action="/post/edit/{{ post._id }}" method="post" class="d-inline">
+                <input type="text" class="d-none" value="{{ post._id }}" name="_id"></input>
+                <button class="btn btn-primary" type="submit">Edit</button>
+            </form>
+            <form action="/post/delete" method="post" class="d-inline">
+              <input type="text" class="d-none" value="{{ post._id }}" name="_id"></input>
+                <button class="btn btn-primary" type="submit">Delete</button>
+            </form>
+              @endif
+        </div>
+        <hr>
+        @endeach
+      </div>
+    </div>
+  </div>
+
+@endsection
